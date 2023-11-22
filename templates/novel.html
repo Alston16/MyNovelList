@@ -1,0 +1,302 @@
+<html class="h-full bg-gray-100">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="/static/output.css" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <title> My Novel List </title>
+</head>
+
+<body class="h-full">
+  <div class="min-h-full">
+    <nav class="bg-gray-800">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu" aria-expanded="false">
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <!--
+                  Icon when menu is closed.
+      
+                  Menu open: "hidden", Menu closed: "block"
+                -->
+              <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+              <!--
+                  Icon when menu is open.
+      
+                  Menu open: "block", Menu closed: "hidden"
+                -->
+              <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="flex flex-shrink-0 items-center">
+              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                alt="Your Company">
+            </div>
+            <div class="hidden sm:ml-6 sm:block">
+              <div class="flex space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a href="{{url_for('home')}}"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  aria-current="page">Home</a>
+                <a href="{{url_for('lists',type='Novels',status='All')}}"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Lists</a>
+                <a href="{{url_for('social')}}"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Social</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <button type="button"
+              class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <span class="absolute -inset-1.5"></span>
+              <span class="sr-only">View notifications</span>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+              </svg>
+            </button>
+
+            <!-- Profile dropdown -->
+            <div x-data="{ isOpen: false }" class="relative ml-3">
+              <div>
+                <button type="button" @click="isOpen = !isOpen"
+                  class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <!--
+                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                    -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="white" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
+
+                </button>
+              </div>
+
+              <!--
+                  Dropdown menu, show/hide based on menu state.
+      
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              <div x-show="isOpen" x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform  scale-95" x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform  scale-100"
+                x-transition:leave-end="transform scale-95"
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                <!-- Active: "bg-gray-100", Not Active: "" -->
+                <a href="{{url_for('profile',username=session['username'])}}"
+                  class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your
+                  Profile</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                  id="user-menu-item-1">Settings</a>
+                <a href="{{url_for('logout')}}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                  tabindex="-1" id="user-menu-item-2">Sign out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="sm:hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a href="{{url_for('home')}}"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            aria-current="page">Home</a>
+          <a href="{{url_for('lists',type='Novels',status='All')}}"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Lists</a>
+          <a href="{{url_for('social')}}"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Social</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 flex justify-center">
+
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div class="relative mb-4">
+            <img src="{{result.img}}" alt="User Profile Photo" class="w-44 h-52 rounded-sm mx-auto">
+          </div>
+          <div class="flex mt-4 space-x-4 justify-center">
+            <h2 class="text-4xl font-semibold">{{name}}</h2>
+          </div>
+          <p class="mt-4 mb-4 truncate text-base leading-5 text-gray-500">Author: {{result.author}}</p>
+          <p class="{{'hidden' if novel_type=='Novel' else ''}} mt-4 mb-4 truncate text-base leading-5 text-gray-500">
+            Status: {{result.status}}</p>
+
+          {%for genre in result.genres.split(',')%}
+          <span
+            class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-sm font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">{{genre}}</span>
+          {%endfor%}
+
+          <form class="{{'flex' if inList else'hidden'}} mt-8 space-x-4 justify-center"
+            action="{{url_for('removeFromList',novel_type=novel_type,name=name,id=result.novel_id if novel_type=='Novel' else result.webnovel_id)}}">
+            <button type="submit" class="flex items-center hover:bg-gray-400 py-2 px-4 rounded font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
+              </svg>
+              Remove From List
+            </button>
+          </form>
+
+          <!-- component -->
+
+          <div x-data="{ showListForm: false }">
+            <!-- Button to open the privacy policy modal -->
+
+            <div class="{{'hidden' if inList else'flex'}} mt-8 space-x-4 justify-center">
+              <button @click="showListForm = true"
+                class="flex items-center hover:bg-gray-400 py-2 px-4 rounded font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                Add To List
+              </button>
+            </div>
+            <!-- Privacy Policy Modal -->
+            <div x-show="showListForm" class="fixed z-10 inset-0 flex items-center justify-center">
+              <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+              <div class="relative bg-white rounded-lg overflow-hidden shadow-xl max-w-screen-md w-full m-4"
+                x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95"
+                x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-200 transform opacity-100 scale-100"
+                x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" x-cloak>
+                <!-- Modal panel -->
+                <form class="px-20 pt-20 pb-8" x-data="{ status: '', score: '', progress: 0 }"
+                  action="{{url_for('addToList',novel_type=novel_type,name=name,id=result.novel_id if novel_type=='Novel' else result.webnovel_id)}}"
+                  method="POST" accept-charset="UTF-8">
+                  <div class="mb-4">
+                    <label for="status" class="block text-sm font-medium text-gray-700">Status of the Novel</label>
+                    <select x-model="status" id="status" name="status" class="mt-1 block w-full p-2 border rounded-md">
+                      <option value="reading">Reading</option>
+                      <option value="on-hold">On Hold</option>
+                      <option value="completed">Completed</option>
+                      <option value="dropped">Dropped</option>
+                      <option value="plan-to-read">Plan to Read</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="score" class="block text-sm font-medium text-gray-700">Score</label>
+                    <select x-model="score" id="score" name="score" class="mt-1 block w-full p-2 border rounded-md">
+                      <option value="">Select Score (Optional)</option>
+                      <option value="10">10 (Masterpiece)</option>
+                      <option value="9">9 (Great)</option>
+                      <option value="8">8 (Very Good)</option>
+                      <option value="7">7 (Good)</option>
+                      <option value="6">6 (Fine)</option>
+                      <option value="5">5 (Average)</option>
+                      <option value="4">4 (Bad)</option>
+                      <option value="3">3 (Very Bad)</option>
+                      <option value="2">2 (Horrible)</option>
+                      <option value="1">1 (Appalling)</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="progress" class="block text-sm font-medium text-gray-700">Progress</label>
+                    <input x-model="progress" type="range" id="progress" name="progress" min="0"
+                      max="{{result.pages if novel_type=='Novel' else result.chapters}}"
+                      class="mt-1 block w-full p-2 border rounded-md">
+                    <span x-text="progress + '/{{result.pages if novel_type=='Novel' else result.chapters}}'"></span>
+                  </div>
+
+                  <div class="mt-6">
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Submit</button>
+                    <a href="{{url_for('novel',name=name,novel_type=novel_type)}}"><button type="button"
+                        class="bg-red-500 text-white py-2 px-4 rounded-md ml-2">Cancel</button></a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!-- component -->
+          <div class="max-w-full mx-4 py-6 sm:mx-auto sm:px-6 lg:px-8">
+            <div class="sm:flex sm:space-x-4">
+              <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow transform transition-all mb-4 w-full sm:w-1/3 sm:my-8">
+                <div class="bg-white p-5">
+                  <div class="sm:flex sm:items-start">
+                    <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+                      <h3 class="text-sm leading-6 font-medium text-gray-400">Rating</h3>
+                      <p class="text-3xl font-bold text-black">{{result.rating}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow transform transition-all mb-4 w-full sm:w-1/3 sm:my-8">
+                <div class="bg-white p-5">
+                  <div class="sm:flex sm:items-start">
+                    <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+                      <h3 class="text-sm leading-6 font-medium text-gray-400">Total {{'Pages' if novel_type=='Novel'
+                        else 'Chapters'}}</h3>
+                      <p class="text-3xl font-bold text-black">{{result.pages if novel_type=='Novel' else
+                        result.chapters}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow transform transition-all mb-4 w-full sm:w-1/3 sm:my-8">
+                <div class="bg-white p-5">
+                  <div class="sm:flex sm:items-start">
+                    <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+                      <h3 class="text-sm leading-6 font-medium text-gray-400">Type</h3>
+                      <p class="text-2xl font-bold text-black">{{novel_type}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h1 class="text-3xl font-bold mb-8">Synopsis</h1>
+
+          <p class="font-serif">{{result.summary}}</p>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+</body>
+
+</html>

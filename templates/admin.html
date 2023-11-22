@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-100">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="/static/output.css" rel="stylesheet" />
+    <title>My Novel List</title>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col items-center py-8">
+    <h1 class="text-2xl font-semibold mb-4">Admin Page</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-6xl mb-4">
+        <div class="bg-white rounded shadow-lg p-4">
+            <!-- Novel Form -->
+            <h2 class="text-lg font-semibold mb-3">Add Novel</h2>
+            <form action="{{url_for('addNovel')}}" method="POST">
+                <div class="mb-4">
+                    <label for="novelName" class="block text-gray-700">Novel Name:</label>
+                    <input name="novelName" type="text" id="novelName" class="form-input border w-full" required>
+                </div>
+                <div class="mb-4">
+                    <label for="novelAuthor" class="block text-gray-700">Author:</label>
+                    <input name="novelAuthor" type="text" id="novelAuthor" class="form-input border w-full" required>
+                </div>
+                <div class="mb-4">
+                    <label for="novelPages" class="block text-gray-700">Number of Pages:</label>
+                    <input name="novelPages" type="number" id="novelPages" class="form-input border w-full" required>
+                </div>
+                <div class="mb-4">
+                    <label for="novelImage" class="block text-gray-700">Image URL:</label>
+                    <input name="novelImage" type="text" id="novelImage" class="form-input border w-full" required>
+                </div>
+                <div class="mb-4">
+                    <label for="novelGenre" class="block text-gray-700">Genres:</label>
+                    <select name="novelGenre" multiple id="novelGenre" class="form-select w-full">
+                        <option value="Romance">Romance</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Nonfiction">Nonfiction</option>
+                        <option value="Historical">Historical</option>
+                        <option value="Childrens">Childrens</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Religion">Religion</option>
+                        <option value="Cultural">Cultural</option>
+                        <option value="Literature">Literature</option>
+                        <option value="Young Adult">Young Adult</option>
+                        <option value="Paranormal">Paranormal</option>
+                        <option value="Science Fiction">Science Fiction</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Humor">Humor</option>
+                        <option value="Erotica">Erotica</option>
+                        <option value="Classics">Classics</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Action">Action</option>
+                        <option value="Comedy">Comedy</option>
+
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="novelDescription" class="block text-gray-700">Description:</label>
+                    <input name="novelDescription" type="text" id="novelDescription" class="form-input border w-full"
+                        required>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Novel</button>
+            </form>
+        </div>
+
+        <div class="bg-white rounded shadow-lg p-4">
+            <!-- Web Novel Form -->
+            <h2 class="text-lg font-semibold mb-3">Add Web Novel</h2>
+            <form action="{{url_for('addWebnovel')}}" method="POST">
+                <div class="mb-4">
+                    <label for="webNovelName" class="block text-gray-700">Web Novel Name:</label>
+                    <input name="webNovelName" type="text" id="webNovelName" class="form-input border w-full" required>
+                </div>
+                <div class="mb-4">
+                    <label for="webNovelAuthor" class="block text-gray-700">Author:</label>
+                    <input name="webNovelAuthor" type="text" id="webNovelAuthor" class="form-input border w-full"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label for="webNovelStatus" class="block text-gray-700">Status:</label>
+                    <select name="webNovelStatus" id="webNovelStatus" class="form-select w-full">
+                        <option value="Complete">Complete</option>
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Dropped">Dropped</option>
+                        <option value="Hiatus">Hiatus</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="webNovelChapters" class="block text-gray-700">Number of Chapters:</label>
+                    <input name="webNovelChapters" type="number" id="webNovelChapters" class="form-input border w-full"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label for="webNovelImage" class="block text-gray-700">Image URL:</label>
+                    <input name="webNovelImage" type="text" id="webNovelImage" class="form-input border w-full"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label for="webNovelGenre" class="block text-gray-700">Genres:</label>
+                    <select name="webNovelGenre" multiple id="webNovelGenre" class="form-select w-full">
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Science Fiction">Science Fiction</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Slice of Life">Slice of Life</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Xianxia">Xianxia</option>
+                        <option value="Isekai">Isekai</option>
+                        <option value="Gaming">Gaming</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Harem">Harem</option>
+                        <option value="Superhero">Superhero</option>
+                        <option value="Supernatural">Supernatural</option>
+                        <option value="Historical">Historical</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Tragedy">Tragedy</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Martial Arts">Martial Arts</option>
+                        <option value="Gender Bender">Gender Bender</option>
+                        <option value="Psychological">Psychological</option>
+                        <option value="Cultivation">Cultivation</option>
+                        <option value="Time Travel">Time Travel</option>
+                        <option value="Political">Political</option>
+                        <option value="Action">Action</option>
+                        <option value="Ecchi">Ecchi</option>
+                        <option value="Reincarnation">Reincarnation</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="School">School</option>
+                        <option value="Revenge">Revenge</option>
+                        <option value="Anti-Hero">Anti-Hero</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="webNovelDescription" class="block text-gray-700">Description:</label>
+                    <input name="webNovelDescription" type="text" id="webNovelDescription"
+                        class="form-input border w-full" required>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Web Novel</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="bg-white rounded shadow-lg p-4 mb-8">
+        <h2 class="text-lg font-semibold mb-3">Add Admin</h2>
+        <form action="{{url_for('addAdmin')}}" method="POST">
+            <div class="mb-4">
+                <label for="adminUsername" class="block text-gray-700">Admin Username:</label>
+                <input name="adminUsername" type="adminUsername" id="adminUsername" class="form-input border w-full"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label for="adminEmail" class="block text-gray-700">Admin Email:</label>
+                <input name="adminEmail" type="adminEmail" id="adminEmail" class="form-input border w-full" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700">Password:</label>
+                <input name="password" type="password" id="password" class="form-input border w-full" required>
+            </div>
+            <div class="{{'flex' if msg else 'hidden'}} bg-{{'green' if success else 'red'}}-300 rounded-lg p-4 mb-4 text-sm text-{{'green' if success else 'red'}}-700"
+                role="alert">
+                <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <div>
+                    <span class="font-medium">{{'Success' if success else 'Error'}}!</span> {{msg}}
+                </div>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Admin</button>
+        </form>
+    </div>
+    <div class="bg-white rounded shadow-lg p-4 mb-8">
+        <h2 class="text-lg font-semibold mb-3">Custom Query:</h2>
+        <form action="{{url_for('admin')}}" method="POST">
+            <div class="mb-4">
+                <label for="query" class="block text-gray-700">Query:</label>
+                <input name="query" type="query" id="query" class="form-input border w-full"
+                    required>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Execute Query</button>
+        </form>
+    </div>
+    <table>
+        {%for res in cust_res%}
+        <tr>
+            {%for field in res%}
+            <td>
+                {{field}}
+            </td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </table>
+
+    <!-- component -->
+    <!-- This is an example component -->
+    <div class="pt-2 relative mx-auto text-gray-600 mb-10">
+        <form action="{{url_for('admin')}}">
+            <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                type="search" name="search" placeholder="Search">
+            <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                    viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                    width="512px" height="512px">
+                    <path
+                        d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+
+    <!-- Novel List -->
+    <ul class="w-full max-w-6xl">
+        {%for novel in results%}
+        <li class="bg-white shadow-lg rounded mb-4 p-4 flex items-center">
+            <img src="{{novel.img}}" alt="Novel Image" class="w-20 h-20 object-cover rounded mr-4">
+            <div class="flex-1">
+                <span class="text-lg font-semibold block">{{novel.name}}</span>
+                <span class="text-gray-700">{{novel.type}}</span>
+            </div>
+            <div class="flex items-center">
+                <a href="{{url_for('addChapters',id=novel.id)}}">
+                <button class="{{'hidden' if novel.type=='Novel' else ''}} bg-blue-500 text-white px-2 py-2 rounded mx-2">+</button>
+                </a>
+                <form action="{{url_for('deleteNovel',novel_type=novel.type,id=novel.id)}}">
+                    <button class="bg-red-500 text-white px-2 py-2 rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                        </svg>
+
+                    </button>
+                </form>
+            </div>
+        </li>
+        {%endfor%}
+    </ul>
+</body>
+
+</html>
